@@ -1,40 +1,49 @@
 # Django
-
-from django.http import HttpResponse
+from django.shortcuts import render
 
 #Utilities
 from datetime import datetime
 
 posts=[
     {
-        'name':'Mont Blac',
-        'user':'Yesica Cortes',
+        'title':'Mont Blanc',
+        'user':{
+            'name':'Yesica Cortes',
+            'picture':'https://picsum.photos/60/60/?image=1027',
+        },    
         'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hrs'),
-        'picture':'https://nichecanvas.com/cdn/shop/products/artwork_5a23aaf9-c8d3-4893-825f-17ef0a0509b6_256x256.jpg?v=1634754511',
+        'photo':'https://picsum.photos/800/600/?image=1036',        
     },
     {
-        'name':'Via Lactea',
-        'user':'C. Vander',
+        'title':'Via Lactea',
+        'user':{
+             'name':'C. Vander',
+             'picture':'https://picsum.photos/60/60/?image=1005',
+        },   
         'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hrs'),
-        'picture':'https://i.pinimg.com/originals/b3/fe/bf/b3febf26db015be223f3c1068e3a6394.jpg',
+        'photo':'https://picsum.photos/800/600/?image=903',
     },
-        {
-        'name':'Nuevo Auditorio',
-        'user':'Thespianartist',
+    {
+        'title':'Nuevo Auditorio',
+        'user':{
+            'name':'Thespianartist',
+            'picture':'https://picsum.photos/60/60/?image=883',
+        },
         'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hrs'),
-        'picture':'https://www.tn23.tv/wp-content/uploads/2023/08/Difusores-Acusticos-256x256.jpg',
+        'photo':'https://picsum.photos/800/600/?image=1076',
     }
 ]
 
 
 def list_posts(request):
 
-    content=[]
+    # content=[] 
+    # for post in posts:
+    #     content.append("""
+    #         <p><strong>{name}</strong></p>
+    #         <p><small>{user} - <i>{timestamp}</i></small></p>
+    #         <figure><img src="{picture}"/></figure>
+    #         """.format(**post))
+    # return HttpResponse('<br>'.join(content))
 
-    for post in posts:
-        content.append("""
-            <p><strong>{name}</strong></p>
-            <p><small>{user} - <i>{timestamp}</i></small></p>
-            <figure><img src="{picture}"/></figure>
-            """.format(**post))
-    return HttpResponse('<br>'.join(content))
+    return render(request,'feed.html',{'posts':posts})
